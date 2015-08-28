@@ -19,7 +19,9 @@ A python program to calculate player comparison fantasy football stats.
 * +/- above the top quarter (weeks 9-16)
 
 Note 1: Execute in the terminal via `python main.py` in the `src` directory
+
 Note 2: Calculations are based on weeks 1-16 with week 17 discarded, as the last week is commonly not apart of the fantasy season or playoffs.
+
 Note 3: The CSV file may be imported into a spreadsheet program (i.e. Google Sheets) to be converted into a user-friendly format for analysis.
 
 ### Credit:

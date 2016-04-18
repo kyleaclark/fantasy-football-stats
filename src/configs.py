@@ -15,7 +15,9 @@ def qb():
         'sortBy': 'passing_yds',
         'sample_size': 20,
         'sample_trim': 20 * trim(),
-        'calc_fantasy_stats': fantasy_pts.calc_qb
+        'calc_fantasy_stats': fantasy_pts.calc_qb,
+        'generate_plyr_stats_dict': fantasy_pts.generate_qb_plyr_stats_dict,
+        'generate_plyr_default_dict': fantasy_pts.generate_qb_plyr_default_dict
     }
 
 def rb():
@@ -27,7 +29,9 @@ def rb():
         'sortBy': 'rushing_yds',
         'sample_size': 30,
         'sample_trim': 30 * trim(),
-        'calc_fantasy_stats': fantasy_pts.calc_pos_plyr
+        'calc_fantasy_stats': fantasy_pts.calc_pos_plyr,
+        'generate_plyr_stats_dict': fantasy_pts.generate_pos_plyr_stats_dict,
+        'generate_plyr_default_dict': fantasy_pts.generate_pos_plyr_default_dict
     }
 
 def wr():
@@ -39,7 +43,9 @@ def wr():
         'sortBy': 'receiving_yds',
         'sample_size': 40,
         'sample_trim': 40 * trim(),
-        'calc_fantasy_stats': fantasy_pts.calc_pos_plyr
+        'calc_fantasy_stats': fantasy_pts.calc_pos_plyr,
+        'generate_plyr_stats_dict': fantasy_pts.generate_pos_plyr_stats_dict,
+        'generate_plyr_default_dict': fantasy_pts.generate_pos_plyr_default_dict
     }
 
 def te():
@@ -51,5 +57,7 @@ def te():
         'sortBy': 'receiving_yds',
         'sample_size': 20,
         'sample_trim': 20 * trim(),
-        'calc_fantasy_stats': fantasy_pts.calc_pos_plyr
+        'calc_fantasy_stats': fantasy_pts.calc_pos_plyr,
+        'generate_plyr_stats_dict': fantasy_pts.generate_pos_plyr_stats_dict,
+        'generate_plyr_default_dict': fantasy_pts.generate_pos_plyr_default_dict
     }

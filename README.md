@@ -6,7 +6,7 @@ The mean for a position group is calculated using only the middle 80% of player 
 * Player name
 * Total points (weeks 1-16)
 * Avg points per game (weeks 1-16)
-* Avg value (average of +/- above median for wks 1-16, wks 1-8, wks 9-16 scaled by availability w/ a multiplier of 10)
+* Auction value (relative positional median value times relative positional top qtr value then squared and scaled by availability)
 * Availability (percentage of number of 2014 games played)
 * +/- above the position mean (weeks 1-16)
 * +/- above the position median (weeks 1-16)

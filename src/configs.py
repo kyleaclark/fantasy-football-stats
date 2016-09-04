@@ -12,6 +12,7 @@ def qb():
     return {
         'weeks': util.fantasy_full_weeks(),
         'position': 'QB',
+        'cost_baseline': 14,
         'sortBy': 'passing_yds',
         'sample_size': 20,
         'sample_trim': 20 * trim(),
@@ -26,6 +27,7 @@ def rb():
     return {
         'weeks': util.fantasy_full_weeks(),
         'position': 'RB',
+        'cost_baseline': 16,
         'sortBy': 'rushing_yds',
         'sample_size': 30,
         'sample_trim': 30 * trim(),
@@ -40,6 +42,7 @@ def wr():
     return {
         'weeks': util.fantasy_full_weeks(),
         'position': 'WR',
+        'cost_baseline': 18,
         'sortBy': 'receiving_yds',
         'sample_size': 40,
         'sample_trim': 40 * trim(),
@@ -54,6 +57,7 @@ def te():
     return {
         'weeks': util.fantasy_full_weeks(),
         'position': 'TE',
+        'cost_baseline': 8,
         'sortBy': 'receiving_yds',
         'sample_size': 20,
         'sample_trim': 20 * trim(),

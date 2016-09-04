@@ -23,7 +23,7 @@ def calc_position_stats(plyr_list, sample_size, sample_trim):
     position_beg_avg = position_beg_avg_sum / divisible
     position_end_avg = position_end_avg_sum / divisible
 
-def calc_plyr(plyr_list, sample_size):
+def calc_plyr(plyr_list, sample_size, cost_baseline):
     'Calculate the comparison stats for a list of players'
 
     median_plyr = (sample_size // 2) - 1
@@ -43,22 +43,25 @@ def calc_plyr(plyr_list, sample_size):
 
     for plyr in plyr_list:
         plyr['plus_minus'] = plyr['avg_pts'] - position_full_avg
+        plyr['relative_avg_value'] = plyr['avg_pts'] / position_full_avg
         plyr['points_above_median'] = plyr['avg_pts'] - median_pts
+        plyr['relative_median_value'] = plyr['avg_pts'] / median_pts
         plyr['points_above_top_qtr'] = plyr['avg_pts'] - top_qtr_pts
+        plyr['relative_top_qtr_value'] = plyr['avg_pts'] / top_qtr_pts
         plyr['beg_plus_minus'] = plyr['beg_avg_pts'] - position_beg_avg
         plyr['beg_points_above_median'] = plyr['beg_avg_pts'] - beg_median_pts
         plyr['beg_points_above_top_qtr'] = plyr['beg_avg_pts'] - beg_top_qtr_pts
         plyr['end_plus_minus'] = plyr['end_avg_pts'] - position_end_avg
         plyr['end_points_above_median'] = plyr['end_avg_pts'] - end_median_pts
         plyr['end_points_above_top_qtr'] = plyr['end_avg_pts'] - end_top_qtr_pts
-        plyr['avg_value'] = calc_plyr_avg_value(plyr)
+        plyr['auction_value'] = calc_plyr_auction_value(plyr, cost_baseline)
 
-    plyr_list.sort(key=lambda p: p['pts'], reverse=True)
+    plyr_list.sort(key=lambda p: p['auction_value'], reverse=True)
 
-def calc_plyr_avg_value(plyr):
-    'Calculates the average value for a player'
+def calc_plyr_auction_value(plyr, cost_baseline):
+    'Calculates the hypothetical auction value for a player'
 
-    value = ((plyr['points_above_median'] + plyr['beg_points_above_median'] + plyr['end_points_above_median']) / 3) * plyr['availability']
-    value = value * 10
+    relative_total_value = (plyr['relative_median_value'] * plyr['relative_top_qtr_value']) ** 2
+    auction_value = (cost_baseline * relative_total_value) * plyr['availability']
 
-    return value if value > 0 else 0
+    return auction_value if auction_value > 0 else 0

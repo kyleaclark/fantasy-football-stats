@@ -1,6 +1,25 @@
 import csv
+import json
+from collections import OrderedDict
 
-def export(player_list, file_name):
+def export_to_json(player_list, position_type):
+    # TODO: Make the year configurable throughout the application
+    name = '2016_' + position_type
+    fileName = name + '.json'
+
+    players = []
+    for index, plyr in enumerate(player_list):
+        player = dict(plyr)
+        player['player'] = str(plyr['name'])
+        del player['name']
+        players.append(player)
+
+    output = OrderedDict([ ('_id', name), ('year', 2016), ('position', position_type), ('data', players) ])
+
+    with open(fileName, 'w') as outfile:
+        json.dump(output, outfile)
+
+def export_to_csv(player_list, file_name):
     'Exports a list of player dicts into a csv file'
 
     with open(file_name, 'w') as csvfile:

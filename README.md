@@ -18,6 +18,22 @@ The mean for a position group is calculated using only the middle 80% of player 
 * +/- above the position median (weeks 9-16)
 * +/- above the top quarter (weeks 9-16)
 
+#### Breakdown of the latest auction value formula:
+
+1. relative positional median value - a player's average points scored per game divided by the median of average points scored per game cumulative for a position
+
+2. relative positional top quarter value - a player's average points scored per game divided by the top quarter median of average points scored per game cumulative for a position
+
+3. multiplied value of relative positional median & top quarter value - relative positional median value multiplied by relative positional top quarter value
+
+4. squared value of the multiplied value - squared value of the multiple of relative positional median & top quarter value
+
+5. squared value scaled by availability - squared value of the multiple of relative positional median & top quarter value, then scaled by the percentage of games a player played in weeks 1 through 16
+
+Note: Power Ranking has an applied floor value of 0 for a 0-100 rating system.
+
+--
+
 Note 1: Execute in the terminal via `python main.py` in the `src` directory (requires python 2.7 and [nfldb](https://github.com/BurntSushi/nfldb) module)
 
 Note 2: Calculations are based on weeks 1-16 with week 17 discarded, as the last week is commonly not apart of the fantasy season or playoffs.

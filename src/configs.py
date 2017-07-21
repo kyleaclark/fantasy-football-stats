@@ -12,7 +12,7 @@ def qb():
     return {
         'weeks': util.fantasy_full_weeks(),
         'position': 'QB',
-        'cost_baseline': 14,
+        'cost_baseline': 20,
         'sortBy': 'passing_yds',
         'sample_size': 20,
         'sample_trim': 20 * trim(),
@@ -27,10 +27,10 @@ def rb():
     return {
         'weeks': util.fantasy_full_weeks(),
         'position': 'RB',
-        'cost_baseline': 16,
+        'cost_baseline': 25,
         'sortBy': 'rushing_yds',
-        'sample_size': 30,
-        'sample_trim': 30 * trim(),
+        'sample_size': 25,
+        'sample_trim': 25 * trim(),
         'calc_fantasy_stats': fantasy_pts.calc_pos_plyr,
         'generate_plyr_stats_dict': fantasy_pts.generate_pos_plyr_stats_dict,
         'generate_plyr_default_dict': fantasy_pts.generate_pos_plyr_default_dict
@@ -42,10 +42,10 @@ def wr():
     return {
         'weeks': util.fantasy_full_weeks(),
         'position': 'WR',
-        'cost_baseline': 18,
+        'cost_baseline': 30,
         'sortBy': 'receiving_yds',
-        'sample_size': 40,
-        'sample_trim': 40 * trim(),
+        'sample_size': 30,
+        'sample_trim': 30 * trim(),
         'calc_fantasy_stats': fantasy_pts.calc_pos_plyr,
         'generate_plyr_stats_dict': fantasy_pts.generate_pos_plyr_stats_dict,
         'generate_plyr_default_dict': fantasy_pts.generate_pos_plyr_default_dict
@@ -57,10 +57,10 @@ def te():
     return {
         'weeks': util.fantasy_full_weeks(),
         'position': 'TE',
-        'cost_baseline': 8,
+        'cost_baseline': 15,
         'sortBy': 'receiving_yds',
-        'sample_size': 20,
-        'sample_trim': 20 * trim(),
+        'sample_size': 15,
+        'sample_trim': 15 * trim(),
         'calc_fantasy_stats': fantasy_pts.calc_pos_plyr,
         'generate_plyr_stats_dict': fantasy_pts.generate_pos_plyr_stats_dict,
         'generate_plyr_default_dict': fantasy_pts.generate_pos_plyr_default_dict

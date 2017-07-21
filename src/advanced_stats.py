@@ -61,7 +61,7 @@ def calc_plyr(plyr_list, sample_size, cost_baseline):
 def calc_plyr_auction_value(plyr, cost_baseline):
     'Calculates the hypothetical auction value for a player'
 
-    relative_total_value = (plyr['relative_median_value'] * plyr['relative_top_qtr_value']) ** 2
+    relative_total_value = (plyr['relative_median_value']) ** 2
     auction_value = (cost_baseline * relative_total_value) * plyr['availability']
 
     return auction_value if auction_value > 0 else 0

@@ -34,7 +34,7 @@ Note: Power Ranking has an applied floor value of 0 for a 0-100 rating system.
 
 --
 
-Note 1: Execute in the terminal via `python main.py` in the `src` directory (requires python 2.7 and [nfldb](https://github.com/BurntSushi/nfldb) module)
+Note 1: Execute in the terminal via `python init.py 2016` in the `src` directory (requires python 2.7 and [nfldb](https://github.com/BurntSushi/nfldb) module)
 
 Note 2: Calculations are based on weeks 1-16 with week 17 discarded, as the last week is commonly not apart of the fantasy season or playoffs.
 

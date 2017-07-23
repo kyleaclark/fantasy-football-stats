@@ -14,7 +14,7 @@ def export_to_json(output_year, player_list, position_type):
         del player['name']
         players.append(player)
 
-    output = OrderedDict([ ('_id', name), ('year', 2017), ('position', position_type), ('data', players) ])
+    output = OrderedDict([ ('_id', name), ('year', output_year), ('position', position_type), ('data', players) ])
 
     with open(fileName, 'w') as outfile:
         json.dump(output, outfile)

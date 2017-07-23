@@ -8,38 +8,52 @@ class NflStats():
         self.query = NflDbQuery(nfl_year)
 
 
-    def generate_position_stats(self):
+    def generate_position_stats(self, position):
         'Generates a list of player objects by position'
-        stats = self.query.aggregrate_position_stats()
+        stats = self.query.aggregrate_position_stats(position.type,
+                                                     position.sample_size,
+                                                     position.sort_by_category,
+                                                     util.full_weeks)
 
         plyr_list = []
         for plyr in stats:
-            plyr_info = self._generate_plyr_info(plyr, )
-            plyr_list.append(self._generate_plyr_info(plyr, config))
+            plyr_info = self._generate_plyr_info(plyr,
+                                                 position.sample_size,
+                                                 position.sort_by_category)
+            plyr_list.append(plyr_info)
 
         return plyr_list
 
 
-    def _generate_plyr_info(self, plyr, config):
+    def _generate_plyr_info(self, plyr, sample_size, sort_by_category):
         'Generates a player object and associated core stats'
         player = Player(plyr.player_id, plyr.player)
 
         # query player game weeks
-        weeks = util.fantasy_full_weeks()
-        full_games = self.query.aggregate_plyr_games(plyr_id, weeks)
-        plyr_full_aggregate = self.query.aggregate_plyr_stats(plyr_id, weeks)
+        weeks = util.full_weeks
+        full_games = self.query.aggregate_plyr_games(player.id, weeks)
+        plyr_full_aggregate = self.query.aggregate_plyr_stats(player.id,
+                                                              sample_size,
+                                                              sort_by_category,
+                                                              weeks)
         player.add_stats('full', plyr_full_aggregate)
 
         # query player stats (weeks 1-8)
-        weeks = util.fantasy_beg_weeks()
-        beg_games = self.query.aggregate_plyr_games(plyr_id, weeks)
-        plyr_beg_aggregate = self.query.aggregate_plyr_stats(plyr_id, weeks)
+        weeks = util.beg_weeks
+        beg_games = self.query.aggregate_plyr_games(player.id, weeks)
+        plyr_beg_aggregate = self.query.aggregate_plyr_stats(player.id,
+                                                             sample_size,
+                                                             sort_by_category,
+                                                             weeks)
         player.add_stats('beg', plyr_beg_aggregate)
 
         # query player stats (weeks 8-16)
-        weeks = util.fantasy_end_weeks()
-        end_games = self.query.aggregate_plyr_games(plyr_id, weeks)
-        plyr_end_aggregate = self.query.aggregate_plyr_stats(plyr_id, weeks)
+        weeks = util.end_weeks
+        end_games = self.query.aggregate_plyr_games(player.id, weeks)
+        plyr_end_aggregate = self.query.aggregate_plyr_stats(player.id,
+                                                             sample_size,
+                                                             sort_by_category,
+                                                             weeks)
         player.add_stats('end', plyr_end_aggregate)
 
         # calculate player fantasy points
@@ -59,6 +73,11 @@ class NflStats():
         beg_avg_pts = (beg_pts / beg_weeks_played) if beg_pts > 0 else 0
         end_avg_pts = (end_pts / end_weeks_played) if end_pts > 0 else 0
         availability = (full_weeks_played / 15) if full_weeks_played > 0 else 0
+
+        print (full_avg_pts)
+        print (beg_avg_pts)
+        print (end_avg_pts)
+        print (availability)
 
         print 'Name: %s, Pts %d %.1f' % (plyr.player, full_pts, full_avg_pts)
 

@@ -17,11 +17,13 @@ class NflDbQuery():
         return query
 
 
-    def aggregrate_position_stats(self, weeks):
+    def aggregrate_position_stats(self, position_type, sample_size,
+                                  sort_by_category, weeks):
         'Aggregates a query of stats by position'
 
         query = self._generate_query(weeks)
-        return query.sort(params['sortBy']).player(position=params['position']).limit(params['sample_size']).as_aggregate()
+        return query.sort(sort_by_category).player(
+            position=position_type).limit(sample_size).as_aggregate()
 
 
     def aggregate_plyr_games(self, plyr_id, weeks):
@@ -31,8 +33,9 @@ class NflDbQuery():
         return query.sort('week').player(player_id=plyr_id).as_games()
 
 
-    def aggregate_plyr_stats(self, plyr_id, weeks):
+    def aggregate_plyr_stats(self, plyr_id, sample_size, sort_by_category,
+                             weeks):
         'Aggregrates a query of stats by player'
 
         query = self._generate_query(weeks)
-        return query.sort(params['sortBy']).player(player_id=plyr_id).limit(params['sample_size']).as_aggregate()
+        return query.sort(sort_by_category).player(player_id=plyr_id).limit(sample_size).as_aggregate()

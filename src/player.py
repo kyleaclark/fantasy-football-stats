@@ -6,16 +6,15 @@ class Player():
         self.id = plyr_id
         self.name = plyr_name
 
-        self.fantasy_stats_dict = {}
-        self.fantasy_points_dict = {}
+        self.fantasy_stats_segments = {}
 
 
     def add_stats(self, segment, stats_aggregrate):
-        stats = stats_aggregrate[0] if stats else {}
-        fantasy_stats = FantasyStats(stats)
-        self.fantasy_stats_dict[segment] = fantasy_stats
-        self.fantasy_points_dict[segment] = fantasy_stats.calc_fantasy_points()
+        stats = stats_aggregrate[0] if stats_aggregrate else {}
+        self.fantasy_stats_segments[segment] = FantasyStats(stats)
 
 
     def get_points_segment(self, segment):
-        return self.fantasy_points_dict[segment]
+        fantasy_stats = self.fantasy_stats_segments[segment]
+        fantasy_stats.calc_fantasy_points()
+        return fantasy_stats.get_fantasy_points()

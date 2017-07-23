@@ -1,41 +1,31 @@
-import sys
-
-import advanced_stats
-import configs
 from nfl_stats import NflStats
 import export_list
-from position import Position
+from summary_stats import SummaryStats
 
 class StatsGenerator():
 
-    def __init__(self):
-        self.positions = {}
+    def __init__(self, nfl_stats, position, output_year):
+        self.nfl_stats = nfl_stats
+        self.position = position
+        self.output_year = output_year
 
 
-    def generate_stats(position_type, config):
-        self.positions.add_position(position_type)
+    def generate_stats(self):
+        players_stats = self.nfl_stats.generate_position_stats(self.position)
 
-        position_stats = nfl_stats.generate_position_stats(config)
-        advanced_stats.calc_position_stats(position_stats, config['sample_size'],
-                                           config['sample_trim'])
-        advanced_stats.calc_plyr(position_stats, config['sample_size'],
-                                 config['cost_baseline'])
-
-        self.positions[position_type]
-
-def init():
-    nfl_year = int(sys.argv[1])
-    output_year = nfl_year + 1
-
-    nfl_stats = NflStats(nfl_year)
-
-    # Process and export qb stats csv
-    config = configs.qb()
+        self.summary_stats = SummaryStats(players_stats,
+                                          self.position.cost_baseline,
+                                          self.position.sample_size,
+                                          self.position.sample_trim)
+        self.summary_stats.calc_position_summary_stats()
+        self.summary_stats.calc_players_summary_stats()
 
 
-    qb_list = nfl_stats.generate_position_stats(config)
-    advanced_stats.calc_position_stats(qb_list, config['sample_size'], config['sample_trim'])
-    advanced_stats.calc_plyr(qb_list, config['sample_size'], config['cost_baseline'])
+    def export_stats(self):
+        players_stats = self.summary_stats.players_stats
+        position_type = self.position.type.lower()
 
-    export_list.export_to_json(output_year, qb_list, 'qb')
-    export_list.export_to_csv(qb_list, ('%d_qb.csv' % output_year))
+        export_list.export_to_json(self.output_year, players_stats, position_type)
+
+        export_list.export_to_csv(players_stats, ('%d_%s.csv' % (self.output_year,
+                                                                 position_type)))

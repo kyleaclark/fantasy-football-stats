@@ -2,9 +2,9 @@ import csv
 import json
 from collections import OrderedDict
 
-def export_to_json(player_list, position_type):
+def export_to_json(output_year, player_list, position_type):
     # TODO: Make the year configurable throughout the application
-    name = '2017_' + position_type
+    name = '%d_%s' % (output_year, position_type)
     fileName = name + '.json'
 
     players = []
@@ -14,7 +14,7 @@ def export_to_json(player_list, position_type):
         del player['name']
         players.append(player)
 
-    output = OrderedDict([ ('_id', name), ('year', 2017), ('position', position_type), ('data', players) ])
+    output = OrderedDict([ ('_id', name), ('year', output_year), ('position', position_type), ('data', players) ])
 
     with open(fileName, 'w') as outfile:
         json.dump(output, outfile)

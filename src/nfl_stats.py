@@ -74,11 +74,6 @@ class NflStats():
         end_avg_pts = (end_pts / end_weeks_played) if end_pts > 0 else 0
         availability = (full_weeks_played / 15) if full_weeks_played > 0 else 0
 
-        print (full_avg_pts)
-        print (beg_avg_pts)
-        print (end_avg_pts)
-        print (availability)
-
         print 'Name: %s, Pts %d %.1f' % (plyr.player, full_pts, full_avg_pts)
 
         return {

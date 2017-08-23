@@ -10,7 +10,7 @@ class Player():
 
 
     def add_stats(self, segment, stats_aggregrate):
-        stats = stats_aggregrate[0] if stats_aggregrate else {}
+        stats = stats_aggregrate[0] if stats_aggregrate else None
         self.fantasy_stats_segments[segment] = FantasyStats(stats)
 
 

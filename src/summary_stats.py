@@ -32,8 +32,9 @@ class SummaryStats():
     def calc_players_summary_stats(self):
         'Calculate the comparison stats for a list of players'
 
-        median_plyr = (len(self.players_stats) // 2) - 1
-        top_qtr_plyr = (len(self.players_stats) // 4) - 1
+        sample_length = (self.sample_size // 2) if len(self.players_stats) > (self.sample_size // 2) else len(self.players_stats)
+        median_plyr = (sample_length // 2) - 1
+        top_qtr_plyr = (sample_length // 4) - 1
 
         self.players_stats.sort(key=lambda p: p['avg_pts'], reverse=True)
         median_pts = self.players_stats[median_plyr]['avg_pts']

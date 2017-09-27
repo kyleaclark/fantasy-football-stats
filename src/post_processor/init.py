@@ -18,7 +18,6 @@ csv_column_map = {
 }
 
 column_names = [
-    'AuctionValue',
     'TotalPts',
     'PtsPpg',
     'Availability',
@@ -42,9 +41,7 @@ auction_rb_df = pd.DataFrame(data=None, index=None, columns=None)
 
 for column in rb_2016:
     column_name = csv_column_map[column]
-    if column_name == 'Player':
-        auction_rb_df[column_name] = rb_2016[column]
-    elif column_name == 'AuctionValue':
+    if column_name == 'Player' or column_name == 'TotalPts':
         auction_rb_df[column_name] = rb_2016[column]
 
 auction_rb_df['Position'] = 'rb'
@@ -82,9 +79,6 @@ for position in positions:
                 if year == years[0]:
                     prior_year_column_name = position + '_PriorYear_' + column_name
                     pos_yr_df[prior_year_column_name] = csv_df[column]
-
-                if column_name == 'AuctionValue':
-                    continue
 
                 column_name = position + '_' + year + '_' + column_name
 
@@ -157,9 +151,8 @@ for column_name in column_names:
     for position in positions:
         cn_prior_list.append((position + '_PriorYear_' + column_name))
 
-        if column_name != 'AuctionValue':
-            for year in years:
-                cn_career_list.append((position + '_' + year + '_' + column_name))
+        for year in years:
+            cn_career_list.append((position + '_' + year + '_' + column_name))
 
     output_df[cn_prior] = output_df[cn_prior_list].mean(axis=1)
     output_df[cn_career] = output_df[cn_career_list].mean(axis=1)
@@ -167,16 +160,15 @@ for column_name in column_names:
     for cn_item in cn_prior_list:
         del output_df[cn_item]
 
-    if column_name != 'AuctionValue':
-        for cn_item in cn_career_list:
-            del output_df[cn_item]
+    for cn_item in cn_career_list:
+        del output_df[cn_item]
 
 #auction_df = auction_rb_df.merge(auction_rb_df, on=['Player', 'Position', 'AuctionValue'], how='outer')
 auction_df = auction_rb_df
 output_df = auction_df.merge(output_df, on='Player', how='outer')
 
 # output_df = auction_df.merge(career_df, on='Player', how='outer')
-output_df = output_df[pd.notnull(output_df['AuctionValue'])]
+# output_df = output_df[pd.notnull(output_df['AuctionValue'])]
 output_df = output_df[pd.notnull(output_df['CareerMean_TotalPts'])]
 output_df = output_df.fillna(value=0)
 

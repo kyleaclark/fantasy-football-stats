@@ -1,5 +1,4 @@
-from nfl_stats import NflStats
-import export_list
+from past_performance import export_list
 from summary_stats import SummaryStats
 
 class StatsGenerator():
@@ -11,7 +10,7 @@ class StatsGenerator():
 
 
     def generate_stats(self):
-        players_stats = self.nfl_stats.generate_position_stats(self.position)
+        players_stats = self.nfl_stats.generate_position_stats(self.position, self.output_year)
 
         self.summary_stats = SummaryStats(players_stats,
                                           self.position.cost_baseline,

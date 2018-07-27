@@ -1,5 +1,3 @@
-import stat_utils as util
-
 class Position():
 
     def __init__(self, position_config):

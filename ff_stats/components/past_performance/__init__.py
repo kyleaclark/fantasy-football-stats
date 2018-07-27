@@ -1,17 +1,17 @@
 import sys
 
 from nfl_stats import NflStats
-from position import Position
-from position_configs import qb_config, rb_config, wr_config, te_config
-from stats_generator import StatsGenerator
+from ff_stats.position import Position
+from ff_stats.position_configs import qb_config, rb_config, wr_config, te_config
+from ff_stats.stats_generator import StatsGenerator
 
-import export_list
 
-def init():
-    nfl_year = int(sys.argv[1])
+def init(nfl_year_param):
+    print(sys.argv)
+    nfl_year = int(sys.argv[1]) if len(sys.argv) > 1 else nfl_year_param
     output_year = nfl_year + 1
 
-    nfl_stats = NflStats(nfl_year)
+    nfl_stats = NflStats()
 
     # Generate and export qb stats
     qb_position = Position(qb_config)
@@ -39,4 +39,4 @@ def init():
 
 
 if __name__ == "__main__":
-    init()
+    init(nfl_year_param=2009)

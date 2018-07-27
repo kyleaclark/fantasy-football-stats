@@ -1,0 +1,9 @@
+name: fantasy_football_stats
+channels: !!python/tuple
+- defaults
+- conda-forge
+dependencies:
+- pip=9.0.1
+- python=2.7.13=0
+- pip:
+  - nfldb==0.2.17

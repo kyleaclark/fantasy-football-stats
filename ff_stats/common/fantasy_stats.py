@@ -3,20 +3,20 @@ from __future__ import division
 
 class FantasyStats(object):
 
-    def __init__(self, player):
+    def __init__(self, nfldb_player):
         # TODO: Add functionality to make fantasy point values configurable
-        self._compute_fantasy_stats(player)
+        self._compute_fantasy_stats(nfldb_player)
         self._compute_fantasy_points()
 
-    def _compute_fantasy_stats(self, player):
-        self.passing_yds = player.passing_yds
-        self.passing_tds = player.passing_tds
-        self.passing_int = player.passing_int
-        self.rushing_yds = player.rushing_yds
-        self.rushing_tds = player.rushing_tds
-        self.receiving_yds = player.receiving_yds
-        self.receiving_tds = player.receiving_tds
-        self.fumbles_lost = player.fumbles_lost
+    def _compute_fantasy_stats(self, nfldb_player):
+        self.passing_yds = nfldb_player.passing_yds
+        self.passing_tds = nfldb_player.passing_tds
+        self.passing_int = nfldb_player.passing_int
+        self.rushing_yds = nfldb_player.rushing_yds
+        self.rushing_tds = nfldb_player.rushing_tds
+        self.receiving_yds = nfldb_player.receiving_yds
+        self.receiving_tds = nfldb_player.receiving_tds
+        self.fumbles_lost = nfldb_player.fumbles_lost
 
     def _compute_fantasy_points(self):
         """Calculates fantasy points by a rb, wr, or te"""

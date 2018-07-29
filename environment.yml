@@ -7,3 +7,4 @@ dependencies:
 - python=2.7.13=0
 - pip:
   - nfldb==0.2.17
+  - pandas==0.23.3

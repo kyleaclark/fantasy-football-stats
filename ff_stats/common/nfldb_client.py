@@ -1,7 +1,7 @@
 import nfldb
 
 
-class NflDbQuery(object):
+class NfldbClient(object):
 
     def __init__(self):
         """Initialize nfldb connection"""

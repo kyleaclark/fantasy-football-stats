@@ -1,13 +1,13 @@
 from __future__ import division
 import ff_stats.common.stat_utils as util
-from ff_stats.common.nfl_db_query import NflDbQuery
-from ff_stats.player import Player
+from ff_stats.common.nfldb_client import NfldbQuery
+from ff_stats.common.player import Player
 
 
 class PlayerRelativePerformance(object):
     
     def __init__(self):
-        self.query = NflDbQuery()
+        self.query = NfldbQuery()
 
     def generate_player_stats_by_category(self, sample_size, stats_category, nfl_year, weeks):
         player_stats = self.query.aggregrate_category_stats(sample_size, stats_category, nfl_year, weeks)

@@ -1,13 +1,12 @@
 from past_performance import export_list
-from summary_stats import SummaryStats
+from ff_stats.summary_stats import SummaryStats
 
-class StatsGenerator():
+class StatsCommunicator():
 
     def __init__(self, nfl_stats, position, output_year):
         self.nfl_stats = nfl_stats
         self.position = position
         self.output_year = output_year
-
 
     def generate_stats(self):
         players_stats = self.nfl_stats.generate_position_stats(self.position, self.output_year)

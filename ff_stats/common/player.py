@@ -5,13 +5,14 @@ class Player(object):
 
     def __init__(self, player_obj):
         self.id = player_obj.player_id
-        self.name = player_obj.player.full_name
+        self.first_name = player_obj.player.first_name
+        self.last_name = player_obj.player.last_name
         self.team = player_obj.player.team
         self.stats = {}
 
-    def compute_stats(self, player_obj, nfl_year):
-        if nfl_year not in self.stats:
-            self.stats[nfl_year] = FantasyStats(player_obj)
+    def compute_stats(self, player_obj, year_delta):
+        if year_delta not in self.stats:
+            self.stats[year_delta] = FantasyStats(player_obj)
 
     def add_stats(self, segment, stats_aggregrate):
         stats = stats_aggregrate[0] if stats_aggregrate else None
